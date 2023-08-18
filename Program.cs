@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpClient();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
@@ -24,6 +25,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseEndpoints(endpoints => {
+    endpoints.MapDefaultControllerRoute();
+});
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
